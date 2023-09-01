@@ -68,26 +68,27 @@
     </header>
     
     <main>
+        <main>
         <section id="services">
             <h2>Services</h2>
-            <form action="addservices.php" method = "POST" id="servicesRequestForm">
+            <form action="addservices.php" method="POST" id="servicesRequestForm">
                 <label for="fullName">Full Name:</label>
-                <input type="text" id="fullName" required>
+                <input type="text" id="fullName" name="fullName" required>
                 
                 <label for="organization">Organization:</label>
-                <input type="text" id="organization">
+                <input type="text" id="organization" name="organization">
                 
                 <label for="address">Address:</label>
-                <input type="text" id="address">
+                <input type="text" id="address" name="address">
                 
                 <label for="email">Email Address:</label>
-                <input type="email" id="email" required>
+                <input type="email" id="email" name="email" required>
                 
                 <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone">
+                <input type="tel" id="phone" name="phone">
                 
                 <label for="serviceType">Type of Services:</label>
-                <select id="serviceType">
+                <select id="serviceType" name="serviceType">
                     <option value="landSurveying">Land Surveying</option>
                     <option value="gisAnalysis">GIS Analysis</option>
                     <option value="remoteSensing">Remote Sensing Data</option>
@@ -95,18 +96,19 @@
                 </select>
                 
                 <label for="serviceDescription">Service Description:</label>
-                <textarea id="serviceDescription" rows="6" maxlength="1000" required></textarea>
+                <textarea id="serviceDescription" name="serviceDescription" rows="6" maxlength="1000" required></textarea>
                 
                 <label for="timeline">Timeline:</label>
-                <input type="text" id="timeline">
+                <input type="text" id="timeline" name="timeline">
                 
                 <label for="budget">Budget:</label>
-                <input type="text" id="budget">
+                <input type="text" id="budget" name="budget">
                 
-                <button type="button" id="cancelButton">Submit</button>
-                <a href="index1.php"><button type="button" id="cancelButton">Cancel</button></a>
+                <button type="submit">Submit</button>
+                <a href="index1.php"><button type="button">Cancel</button></a>
             </form>
         </section>
+    </main>
     </main>
     
     <script>

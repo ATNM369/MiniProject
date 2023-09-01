@@ -71,20 +71,20 @@
     <main>
         <section id="projects">
             <h2>Projects</h2>
-            <form id="projectsRequestForm">
+            <form action="addprojects.php" method="POST" id="projectsRequestForm">
                 <h3>Personal Information</h3>
 
                 <label for="fullName">Full Name:</label>
-                <input type="text" id="fullName" required>
+                <input type="text" id="fullName" name="fullName" required>
 
                 <label for="Address">Address:</label>
-                <input type="text" id="Address" required>
+                <input type="text" id="Address" name="Address" required>
 
                 <label for="EmailAddress">Email Address:</label>
-                <input type="email" id="EmailAddress" required>
+                <input type="email" id="EmailAddress" name="EmailAddress" required>
 
                 <label for="PhoneNumber">Phone Number:</label>
-                <input type="tel" id="PhoneNumber" required>
+                <input type="tel" id="PhoneNumber" name="PhoneNumber" required>
 
                 <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" name="dob" required>
@@ -92,25 +92,25 @@
                 <h3>Educational Qualifications</h3>
                 
                 <label for="HEL">Highest Education Level:</label>
-                <textarea id="HEL" rows="6" maxlength="1000" required></textarea>
+                <textarea id="HEL" name="HEL" rows="6" maxlength="1000" required></textarea>
 
                 <label for="AcademicBackground">Academic Background:</label>
-                <textarea id="AcademicBackground" rows="6" maxlength="1000" required></textarea>
+                <textarea id="AcademicBackground" name="AcademicBackground" rows="6" maxlength="1000" required></textarea>
 
                 <h3>Work Experience</h3>
                 
                 <label for="PreviousWorkExperience">Previous Work Experience:</label>
-                <textarea id="PreviousWorkExperience" rows="6" maxlength="1000" required></textarea>
+                <textarea id="PreviousWorkExperience" name="PreviousWorkExperience" rows="6" maxlength="1000" required></textarea>
 
                 <label for="JobResponsibilities">Job Responsibilities:</label>
-                <textarea id="JobResponsibilities" rows="6" maxlength="1000" required></textarea>
+                <textarea id="JobResponsibilities" name="JobResponsibilities" rows="6" maxlength="1000" required></textarea>
 
                 <h3>Skills and Competencies</h3>
                 
                 <label for="SkillsAndCompetencies">Skills and Competencies:</label>
-                <textarea id="SkillsAndCompetencies" rows="6" maxlength="1000" required></textarea>
+                <textarea id="SkillsAndCompetencies" name="SkillsAndCompetencies" rows="6" maxlength="1000" required></textarea>
                 
-                <button onclick="alert('Your Submission is Successful!')" type="submit">Submit</button>
+               <button type="submit">Submit</button>
                 <a href="index1.php"><button type="button" id="cancelButton">Cancel</button></a>
             </form>
         </section>
