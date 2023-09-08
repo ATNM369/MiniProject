@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 require_once '../db.php';
 
 if (isset($_POST["login"])) {
@@ -19,7 +21,11 @@ if (isset($_POST["login"])) {
         // Verify the hashed password
         if (password_verify($pass, $storedPassword)) {
 
+            $_SESSION["userName"] = $userName;
+            $_SESSION["role"] = "user";
+
             header ('Location: ../index1.php');
+            exit;
 
             //echo "Successfully Login";
         } else {

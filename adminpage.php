@@ -1,3 +1,16 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['userName']) ){      
+        header ('Location:index.php');
+        exit;
+    }elseif(isset($_SESSION['role'])){
+        if($_SESSION["role"] !== "admin"){
+            header ('Location:index.php');
+            exit;
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +104,7 @@
             <a href="about_team.php">About Us</a>
             <a href="ongoing_projects.php">Projects</a>
             <a href="#">Events</a>
-            <a href="index.php">Log Out</a>
+            <a href="logout.php">Log Out</a>
         </div>
 
         <div class="content">

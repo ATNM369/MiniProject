@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,12 +40,21 @@
                 </li>
                     <li><a href="event.php">EVENTS</a></li>
                     <li><a href="contact.php">CONTACT US</a></li>
-                 
-                    <li><a href="#">Login <i class="fa fa-sort-desc"></i></a>
-                        <div class="sub-nav-links">
-                            <ul>
-                                <li><a href="login.php">Login</a></li>
-                                <li><a href="index_admin.php">Admin</a></li>
-                            </ul>
-                        </div>
+                    <?php
+                  if (isset($_SESSION["userName"])) {
+                      // If $_SESSION["userName"] is set, display the link
+                      echo '<li><a href="logout.php">LOGOUT</a></li>';
+                  } else {
+                      // If $_SESSION["userName"] is not set, display the alternative content
+                      echo '<li>
+                              <a href="login.php">Login <i class="fa fa-sort-desc"></i></a>
+                              <div class="sub-nav-links">
+                                  <ul>
+                                      <li><a href="login.php">Login</a></li>
+                                      <li><a href="index_admin.php">Admin</a></li>
+                                  </ul>
+                              </div>
+                            </li>';
+                  }
+                  ?>
                 </ul>

@@ -1,3 +1,13 @@
+<?php
+    session_start();
+
+    if(!isset($_SESSION['userName'])){      
+        header ('Location:index.php');
+        exit;
+    }
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,7 +46,7 @@
                 </li>
                     <li><a href="event.php">EVENTS</a></li>
                     <li><a href="contact.php">CONTACT US</a></li>
-                    <li><a href="index.php">Log Out</a></li>
+                    <li><a href="logout.php">Log Out</a></li>
                 </ul>
 
 </div>

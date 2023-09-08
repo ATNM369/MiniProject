@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'db.php';
 
 function test_input($data) {
@@ -25,6 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify the provided password with the hashed password in the database
         if (password_verify($password, $hashedPassword)) {
             // Password is correct, redirect to the admin page
+
+            $_SESSION["userName"] = $username;
+            $_SESSION["role"] = "admin";
+
+
             header("location: adminpage.php");
             exit;
         } else {
