@@ -33,7 +33,7 @@
                         </ul>
                     </div>
                 </li>
-                    <li><a href="">EVENTS</a></li>
+                    <li><a href="event.php">EVENTS</a></li>
                     <li><a href="contact.php">CONTACT US</a></li>
                    
                     <li><a href="#">Login <i class="fa fa-sort-desc"></i></a>
@@ -87,12 +87,16 @@
                 </div>
             </div>
             <div class="contact-col">
-                <form action="">
-                    <input type="text" placeholder="Enter your name" required>
-                    <input type="email" placeholder="Enter email address" required>
-                    <textarea rows="8" placeholder="Message" required></textarea>
-                    <button type="submit" class="hero-btn red-btn">Send Message</button>
-                </form>
+            <form action="process_form.php" method="post">
+
+            <input type="text" placeholder="Enter your name" name="name" id="name" required><br><br>
+
+            <input type="email" placeholder="Enter email address" name="email" id="email" required><br><br>
+
+            <textarea name="message"  placeholder="Message" id="message" rows="5" required></textarea><br><br>
+            <button type="submit" value="Submit" class="hero-btn red-btn" >Send Message</button>
+
+            </form>
             </div>
         </div>
     </section>

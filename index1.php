@@ -34,7 +34,7 @@
                         </ul>
                     </div>
                 </li>
-                    <li><a href="">EVENTS</a></li>
+                    <li><a href="event.php">EVENTS</a></li>
                     <li><a href="contact.php">CONTACT US</a></li>
                     <li><a href="index.php">Log Out</a></li>
                 </ul>
@@ -60,7 +60,7 @@
                 <p>Land Surveying, Land Management Consultancy, Land Administration, Land Governance, 
                     Urban Planning, 3D Modelling, UAV Surveying, LiDAR, Land Management Platform Development, and 
                     Research and Analysis</p>
-                    <center><a href="services_apply.php"><button>Apply</button></a> </center>
+                    <center><a href="services_apply.php"><button type="submit" class="hero-btn1 red-btn1">Apply</button></a> </center>
             </div>
 
                 <div class="services-col">
@@ -68,7 +68,7 @@
                     <p>The Geo-Tech HUB of Sabaragamuwa University of Sri Lanka(SUSL) established under the 
                         guidance of the University Grants Commission(UGC), Sri Lanka at the premises of the 
                         Faculty of Geomatics, SUSL.</p>
-                        <center><a href="projects_apply.php"><button>Apply</button></a></center>
+                        <center><a href="projects_apply.php"><button type="submit" class="hero-btn1 red-btn1">Apply</button></a></center>
                 </div>
         
                     <div class="services-col">
@@ -76,7 +76,7 @@
                         <p>The Geo-Tech HUB of Sabaragamuwa University of Sri Lanka(SUSL) established under the 
                             guidance of the University Grants Commission(UGC), Sri Lanka at the premises of the 
                             Faculty of Geomatics, SUSL.</p>
-                            <center><a href="publishes_apply.php"><button>Apply</button></a></center>
+                            <center><a href="publishes_apply.php"><button type="submit" class="hero-btn1 red-btn1">Apply</button></a></center>
                     </div>
         </div>
 

@@ -34,7 +34,7 @@
                         </ul>
                     </div>
                 </li>
-                    <li><a href="">EVENTS</a></li>
+                    <li><a href="event.php">EVENTS</a></li>
                     <li><a href="contact.php">CONTACT US</a></li>
                  
                     <li><a href="#">Login <i class="fa fa-sort-desc"></i></a>

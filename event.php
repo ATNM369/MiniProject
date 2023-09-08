@@ -3,7 +3,9 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Geo-Tech Hub</title>
+
         <link rel="stylesheet" href="style.css">
+        
         <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
@@ -11,7 +13,7 @@
     </head>
 
 <body>
-    <section class="sub-headerA">
+    <section class="sub-headerB">
         <nav>
             <a href="index.php"><img src="img/GeoTechHUB2.png"></a>
             <div class="nav-links">
@@ -33,68 +35,60 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="event.php">EVENTS</a></li>
+                    <li><a href="">EVENTS</a></li>
                     <li><a href="contact.php">CONTACT US</a></li>
-                    
-                    
+                   
                     <li><a href="#">Login <i class="fa fa-sort-desc"></i></a>
                         <div class="sub-nav-links">
                             <ul>
                                 <li><a href="login.php">Login</a></li>
                                 <li><a href="index_admin.php">Admin</a></li>
-                            </ul>
-                        </div>
                 </ul>
             </div>
         </nav>
-        <h1>OVERVIEW</h1>
+        <h1>EVENTS</h1>
     </section>
 
 
-    <!----------------------------------------About Us content---------------------------------------------------->
+<!------------------------------------------event content--------------------------------------------->
 
-<section class="about-us">
+<section class="event">
 
-    <div class="row">
-        <div class="about-col">
-            <h1>Introduction</h1>
-            <p>The Geo-Tech HUB of Sabaragamuwa University of Sri Lanka(SUSL) established 
-                under the guidance of the University Grants Commission(UGC), Sri Lanka at the 
-                premises of the Faculty of Geomatics, SUSL. The pioneer coordinator of this 
-                centre is Dr.N.M.P.Milinda Piyasena, Senior Lecturer at the Department of Surveying 
-                and Geodesy of the Faculty of Geomatics of SUSL.</p>
-            
-            <p>The Geo-Tech HUB consists of dynamic and highly qualified team members including experienced 
-                academics of the Faculty of Geomatics. With dedicated and skilled technical support services 
-                we mainly facilitate land use and land development by making available land information for quick 
-                and precise decision-making, improving and increasing the reliability of land transactions and 
-                increasing the economic value of lands and facilitating local and foreign and local land investments 
-                through the reliable and updated land information.</p>
+<div class="new">
+<div class="center-image">
+                <!--<img src="img/yuyu.jpg" alt="Event 1 Image"> -->
+            </div>
+            <h2>Advanced Techniques for Geospatial Mapping</h2>
 
-        </div>
-        <div class="about-col">
-            <img src="img/geo1 (2).JPG">
-        </div>
-    </div>
-
-</section>
-
-<section class="mid">
-    <div class="others">
-        <p><b>Specialties</b><br>Land Surveying, Land Management Consultancy, Land Administration, Land Governance, 
-            Urban Planning, 3D Modelling, UAV Surveying, LiDAR, Land Management Platform Development, and Research 
-            and Analysis</p><br>
-        <p><b>Industry</b><br>Research Services</p><br>
-        <p><b>Company size</b><br>11-50 employees</p><br>
-        <p><b>Headquarters</b><br>Belihuloya, Rathnapura</p><br>
-        <p><b>Founded</b><br>2020</p>
+    <p>Explore UAV-based Surveying & Lidar Tech in a 40-hour intensive course. Gain advanced skills in modern 
+        surveying using drones & Lidar. Ideal for professionals, students, and experts in geospatial fields. Learn UAV 
+        technology, Lidar principles, effective mission planning, and data processing. Real-world applications showcased. 
+        No strict prerequisites; basic understanding of geospatial concepts advantageous. Blended format with lectures, 
+        hands-on lab sessions, and field exercises. Elevate your career with cutting-edge geospatial knowledge. Enroll for 
+        a competitive edge in the ever-evolving industry.</p>
         
-    </div>
+      </div>
+        <br><br>
+
+        <div class="new">
+            <!-- Centered Image with Text -->
+
+            <div class="center-image">
+                <!--<img src="img/yuyuyu.jpg" alt="Event 2 Image"> -->
+            </div>
+            <h2>Research Assistant Opportunities</h2>
+
+    <p>Innovative Low-Cost GNSS Receiver Development Project at Geo Tech-Hub Introduce a Low-Cost GNSS Receiver 
+        for Surveying and Geopolitical Industry: An approach for cost-effective precise positioning and mapping.<br><br>
+        Geo Tech-Hub is happy to announce an exciting research opportunity in collaboration with the UBLC, Sabaragamuwa 
+        University of Sri Lanka. We are launching an innovative project to develop a Low-Cost GNSS Receiver for Surveying and 
+        Geopolitical Industry, aimed at advancing positioning and mapping capabilities.
+        </p>
+</div>
+
 </section>
 
- 
-
-<!----------------------------------------Footer---------------------------------------------------->
+<!--------------------------------------Footer---------------------------------------------------->
 
 
 
@@ -146,3 +140,4 @@
 
 </body>
 </html>
+
