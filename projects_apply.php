@@ -1,3 +1,16 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['userName']) ){      
+        header ('Location:index.php');
+        exit;
+    }elseif(isset($_SESSION['role'])){
+        if($_SESSION["role"] !== "admin"){
+            header ('Location:index.php');
+            exit;
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
