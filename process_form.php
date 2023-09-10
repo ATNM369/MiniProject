@@ -19,8 +19,8 @@
             $mail->isSMTP(); 
             $mail->SMTPAuth = true; 
             $mail->Host = 'smtp.gmail.com';                                                 
-            $mail->Username = '';                   
-            $mail->Password = '';   
+            $mail->Username = 'geotechhubsusl@gmail.com';                   
+            $mail->Password = '12geotechhubsusl34';   
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         
             $mail->Port = 465; 
     

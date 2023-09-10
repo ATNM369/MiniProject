@@ -16,61 +16,112 @@
 
     </section>
 
-    <section class="services">
+    <!------------------------------------------------------------our instruments----------------------------------------------------->
 
-        <div class="row">
-            <div class="services-col">
-                <h3>Services</h3>
-                <p>Land Surveying, Land Management Consultancy, Land Administration, Land Governance, 
-                    Urban Planning, 3D Modelling, UAV Surveying, LiDAR, Land Management Platform Development, and 
-                    Research and Analysis</p>
-                    <!--<center><a href="services_apply.php"><button>Apply</button></a> </center>-->
-            </div>
 
-                <div class="services-col">
-                    <h3>Projects</h3>
-                    <p>The Geo-Tech HUB of Sabaragamuwa University of Sri Lanka(SUSL) established under the 
-                        guidance of the University Grants Commission(UGC), Sri Lanka at the premises of the 
-                        Faculty of Geomatics, SUSL.</p>
-                        <!--<center><a href="projects_apply.php"><button>Apply</button></a></center>-->
-                </div>
-        
-                    <div class="services-col">
-                        <h3>Publishes</h3>
-                        <p>The Geo-Tech HUB of Sabaragamuwa University of Sri Lanka(SUSL) established under the 
-                            guidance of the University Grants Commission(UGC), Sri Lanka at the premises of the 
-                            Faculty of Geomatics, SUSL.</p>
-                            <!--<center><a href="publishes_apply.php"><button>Apply</button></a></center>-->
-                    </div>
-        </div>
-
-    </section>
- 
-<!---------------------------------------our instruments----------------------------->
 <section class="instruments">
     <h1>Our Instruments</h1>
-    <p>The Geo-Tech HUB of Sabaragamuwa University of Sri Lanka(SUSL) established under the 
-        guidance of the University Grants Co
+    <p>These are the high quality surveying instruments that available in Geo-Tech Hub such as DJI Phantom 4 droner, DJI Phantom 4 RTK 
+        droner and E-Survey GNSS RTK etc. The Phantom 4 drones are designed for aerial photography and videography, as well as recreational 
+        and professional use. The DJI Phantom 4 RTK (Real-Time Kinematic) is a specialized version of the Phantom 4 drone designed 
+        specifically for high-precision surveying, mapping, and geospatial applications. It incorporates RTK technology, which is a 
+        satellite navigation technique used to enhance the precision of position data. "E-Survey GNSS RTK," stands for Electronic 
+        Surveying Global Navigation Satellite System Real-Time Kinematic. GNSS RTK is a technology used in surveying and geospatial 
+        applications to achieve high-precision positioning in real-time.These equipment are available to meet the needs of our clients. 
+        We always make sure these instruments are ready to use and prepare in excellent condition.
     </p>
     
     <div class="row">
         <div class="instruments-col">
             <img src="img/4 copy.jpg">
             <h3>DJI Phantom 4</h3>
+            <p>The DJI Phantom 4 is a series of consumer-grade drones developed by DJI, a well-known manufacturer of unmanned aerial 
+                vehicles (UAVs) and camera systems. The Phantom 4 drones are designed for aerial photography and videography, as well as 
+                recreational and professional use.
+            </p>
         </div>
 
         <div class="instruments-col">
             <img src="img/4 rtk copy.jpg">
             <h3>DJI Phantom 4 RTK</h3>
+            <p>The DJI Phantom 4 RTK (Real-Time Kinematic) is a specialized version of the Phantom 4 drone designed specifically for 
+                high-precision surveying, mapping, and geospatial applications. It incorporates RTK technology, which is a satellite 
+                navigation technique used to enhance the precision of position data.</p>
         </div>
 
         <div class="instruments-col">
             <img src="img/esy copy.jpg">
             <h3>E-Survey GNSS RTK</h3>
+            <p>It seems like you're referring to "E-Survey GNSS RTK," which likely stands for Electronic Surveying Global Navigation 
+                Satellite System Real-Time Kinematic. GNSS RTK is a technology used in surveying and geospatial applications to achieve 
+                high-precision positioning in real-time. 
+            </p>
         </div>
     </div>
 
 </section>
+
+
+
+<!------------------------------------------------apply for a service---------------------------------------------------------->
+
+<section class="services">
+    <div class="row">
+    <h1>APPLY FOR A SERVICE</h1>
+    </div>
+
+    <div class="row">
+        <p>We invite you to apply to publish your research on our website. We are committed to providing a platform for researchers to 
+            share their work with the world, and we believe that your research has the potential to make a significant impact.</p>
+        </div>
+    
+    <div class="row">
+        <form action="">
+            <button type="submit" class="hero-btn1 red-btn1">Apply</button>
+        </form>
+    </div>
+
+</section>
+
+
+<!------------------------------------------------------apply for publishes and researches----------------------------------------->
+
+<section class="pu">
+<div class="row">
+<h1>APPLY FOR A RESEARCH PUBLICATION</h1>
+</div>
+
+<div class="row">
+    <p>We invite you to apply to publish your research on our website. We are committed to providing a platform for researchers to 
+        share their work with the world, and we believe that your research has the potential to make a significant impact.</p>
+</div>
+
+<div class="row">
+    <form action="">
+        <button type="submit" class="hero-btn1 red-btn1">Apply</button>
+    </form>
+</div>
+</section>
+
+<section class="pr">
+<div class="row">
+<h1>APPLY FOR A PROJECT</h1>
+</div>
+
+<div class="row">
+    <p>Are you looking for a challenging and rewarding project to work on?<br>
+        We are currently looking for qualified individuals to join our team on an ongoing project. This is a great opportunity to gain 
+        experience in a fast-paced and dynamic environment.
+     </p>
+</div>
+
+<div class="row">
+    <form action="">
+        <button type="submit" class="hero-btn1 red-btn1">Apply</button>
+    </form>
+</div>
+</section>
+
 
 <!-------------------------------------our softwares------------------------------
 <section class="softwares">
