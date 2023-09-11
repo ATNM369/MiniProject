@@ -19,19 +19,19 @@
             $mail->isSMTP(); 
             $mail->SMTPAuth = true; 
             $mail->Host = 'smtp.gmail.com';                                                 
-            $mail->Username = 'geotechhubsusl@gmail.com';                   
-            $mail->Password = '12geotechhubsusl34';   
+            $mail->Username = 'geotechhub2023@gmail.com';                   
+            $mail->Password = 'fxzecfarztccuvsv';   
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         
             $mail->Port = 465; 
     
             // Sender and recipient settings
-            $mail->setFrom('no-reply@sas.susl.com', "Student Attendance System");
-            $mail->addReplyTo('no-reply@sas.susl.com', "Student Attendance System");
+            $mail->setFrom('no-reply@sas.susl.com', "Geo Tech Hub");
+            $mail->addReplyTo('no-reply@sas.susl.com', "Geo Tech Hub");
             $mail->addAddress($email);
     
             // Email content
             $mail->isHTML(true);                                  
-            $mail->Subject = 'Password Reset Request from Student Attendance System';
+            $mail->Subject = 'Password Reset Request from Geo Tech Hub';
             $email_template = $message_body;
             $mail->Body = $email_template;
     
@@ -43,7 +43,7 @@
 
 
         } catch (Exception $e) {
-            header("Location:contact.php?showModal=true&status=unsuccess&message=Email not sent! " . $e->getMessage());
+            header("Location:contact.php?showModal=true&status=unsuccess&message=Email not sent!");
         }
 
 ?>
