@@ -104,6 +104,7 @@
             <a href="about_team.php">About Us</a>
             <a href="ongoing_projects.php">Projects</a>
             <a href="#">Events</a>
+            <a href="viewMessage.php">Messages</a>
             <a href="logout.php">Log Out</a>
         </div>
 

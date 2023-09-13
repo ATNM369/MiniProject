@@ -1,4 +1,7 @@
 <?php
+
+    include_once 'db.php';
+
     $name = $_POST["name"];
     $email = $_POST["email"];
     $message = $_POST["message"];
@@ -37,9 +40,25 @@
     
             // Send email
             $mail->send();
+
+            $sql = "INSERT INTO message (`name`, `email`, `message`,) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sss", $name, $email, $message);
+
+            if ($stmt->execute()) {
+                $stmt->close();
+                $conn->close();
+                header("Location:contact.php?message_sent_successfully");
+                exit;
+            } else {
+                $stmt->close();
+                $conn->close();
+                echo "Error: " . $stmt->error;
+            }
+
             
-            header("Location:contact.php?message_sent_successfully");
-            exit;
+            
+            
 
 
         } catch (Exception $e) {
