@@ -41,7 +41,7 @@
             // Send email
             $mail->send();
 
-            $sql = "INSERT INTO message (`name`, `email`, `message`,) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO message (`name`, `email`, `message`) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sss", $name, $email, $message);
 

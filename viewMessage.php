@@ -146,8 +146,8 @@
         </tr>
       </thead>
       <tbody>
-    <?php try
-{
+    <?php 
+    try{
     $sql = "SELECT * FROM message";
 
     if (mysqli_query($conn, $sql))
@@ -182,17 +182,17 @@
 
                         <?php
             }
-        }
-        else
-        {
+    }
+    else
+    {
 ?>
 
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h5><?php echo "Publication applications are not found"; ?></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h5><?php echo "Publication applications are not found"; ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
-            <?php
+    <?php
         }
     }
 }

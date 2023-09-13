@@ -111,8 +111,5 @@
     </main>
     </main>
     
-    <script>
-        // Your JavaScript code here
-    </script>
 </body>
 </html>
