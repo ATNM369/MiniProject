@@ -30,13 +30,12 @@
             // Sender and recipient settings
             $mail->setFrom('no-reply@sas.susl.com', "Geo Tech Hub");
             $mail->addReplyTo('no-reply@sas.susl.com', "Geo Tech Hub");
-            $mail->addAddress($email);
+            $mail->addAddress("geotechhubsusl@gmail.com");
     
             // Email content
             $mail->isHTML(true);                                  
             $mail->Subject = 'Password Reset Request from Geo Tech Hub';
-            $email_template = $message_body;
-            $mail->Body = $email_template;
+            $mail->Body = $message_body;
     
             // Send email
             $mail->send();

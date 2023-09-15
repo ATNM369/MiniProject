@@ -34,6 +34,7 @@ if (isset($_POST["signup"])) {
 
     if ($stmt->execute()) {
         echo "Record inserted successfully.";
+        
     } else {
         echo "Error: " . $stmt->error;
     }
