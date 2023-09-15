@@ -34,14 +34,13 @@
  
             <div class="textbox">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <input type="text" placeholder="Username"
-                         name="username" value="">
+                <input type="text" placeholder="Username" name="username" value="">
             </div>
  
             <div class="textbox">
                 <i class="fa fa-lock" aria-hidden="true"></i>
-                <input type="password" placeholder="Password"
-                         name="password" value="">
+                <input type="password" placeholder="Password" id="password" name="password" value="">
+                <i class="fa fa-eye-slash" id="eye-icon" aria-hidden="true"></i>
             </div>
  
             <input class="button" type="submit"
@@ -75,6 +74,22 @@
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script>
+        let eyeIcon = document.getElementById("eye-icon");
+        let password = document.getElementById("password");
+
+        eyeIcon.onclick = function () {
+            if (password.type === "password") {
+                password.type = "text";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            } else {
+                password.type = "password";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            }
+        }
+    </script>
 </body>
  
 </html>

@@ -30,7 +30,7 @@
                   <li>
                      <a href="#">ABOUT US <i class="fa fa-sort-desc"></i></a>
                      <div class="sub-nav-links">
-                        <ul>
+                        <ul style="margin:auto; padding:0;">
                            <li><a href="overview.php">OVERVIEW</a></li>
                            <li><a href="about_team.php">OUR TEAM</a></li>
                         </ul>
@@ -39,7 +39,7 @@
                   <li>
                      <a href="#">PROJECTS <i class="fa fa-sort-desc"></i></a>
                      <div class="sub-nav-links">
-                        <ul>
+                        <ul style="margin:auto; padding:0;">
                            <li><a href="ongoing_projects.php">ONGOING</a></li>
                            <li><a href="completed_projects.php">COMPLETED</a></li>
                         </ul>

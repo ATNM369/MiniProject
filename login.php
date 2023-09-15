@@ -9,6 +9,8 @@
 <html lang="en">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href=
+"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body, h1, p, input, button {
     margin: 0;
@@ -75,6 +77,19 @@ body, h1, p, input, button {
     text-align: center;
 }
 
+.password-input {
+    position: relative;
+}
+
+#eye-icon {
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
 </style>
 
 </head>
@@ -93,7 +108,11 @@ body, h1, p, input, button {
                 <input type="text" name="username" required><br>
                 
                 <label for="password">Password:</label>
-                <input type="password" name="password" required><br>
+                <div class="password-input">
+                    <input type="password" name="password" id="password" required>
+                    <i class="fa fa-eye-slash" id="eye-icon" aria-hidden="true"></i>
+                </div>
+
                 
                 <button name="login" type="submit">Login</button>
             </form></br>
@@ -102,6 +121,23 @@ body, h1, p, input, button {
 			
         </div>
     </div>
+    <script>
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("eye-icon");
+
+        eyeIcon.addEventListener("click", function () {
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            }
+        });
+    </script>
+
 </body>
 </html>
 

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <title>Sign Up</title>
-
+    <link rel="stylesheet" href=
+"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body, h1, p, input, button {
             margin: 0;
@@ -92,6 +93,18 @@
   left: -35px;
   content: "✖";
 }
+.password-input {
+    position: relative;
+}
+
+#eye-icon {
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
     </style>
 
 </head>
@@ -126,7 +139,11 @@
             
                 <input type="password" placeholder="Password" id="pwd" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 
-                <input type="password" name="passwordrepeat" placeholder="Repeat the entered password" required><br>
+
+                <div class="password-input">
+                    <input type="password" name="password" name="passwordrepeat" placeholder="Repeat the entered password" id="password" required>
+                    <i class="fa fa-eye-slash" id="eye-icon" aria-hidden="true"></i>
+                </div>
 
                 <input type="submit" name="signup",value="Register"><br>
 
@@ -204,5 +221,21 @@ myInput.onkeyup = function() {
   }
 }
 </script>
+    <script>
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("eye-icon");
+
+        eyeIcon.addEventListener("click", function () {
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            }
+        });
+    </script>
 </body>
 </html>
