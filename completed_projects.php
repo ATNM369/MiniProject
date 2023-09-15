@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    include_once "db.php";
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,9 +10,15 @@
         <title>Geo-Tech Hub</title>
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+         <!--Jquery-->
+	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        <!--Ajax-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
 <body>
@@ -15,33 +26,48 @@
         <nav>
             <a href="index.php"><img src="img/GeoTechHUB2.png"></a>
             <div class="nav-links">
-                <ul>
-                    <li><a href="index.php">HOME</a></li>
-                    <li><a href="#">ABOUT US <i class="fa fa-sort-desc"></i></a>
-                            <div class="sub-nav-links">
-                                <ul>
-                                    <li><a href="overview.php">OVERVIEW</a></li>
-                                    <li><a href="about_team.php">OUR TEAM</a></li>
-                                </ul>
-                            </div>
-                    </li>
-                    <li><a href="#">PROJECTS <i class="fa fa-sort-desc"></i></a>
-                        <div class="sub-nav-links">
-                            <ul>
-                                <li><a href="ongoing_projects.php">ONGOING</a></li>
-                                <li><a href="completed_projects.php">COMPLETED</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="event.php">EVENTS</a></li>
-                    <li><a href="contact.php">CONTACT US</a></li>
-                    <li><a href="#">Login <i class="fa fa-sort-desc"></i></a>
-                        <div class="sub-nav-links">
-                            <ul>
-                                <li><a href="login.php">Login</a></li>
-                                <li><a href="index_admin.php">Admin</a></li>
-                   
-                </ul>
+               <ul style="margin-bottom:0;">
+                  <li><a href="index.php">HOME</a></li>
+                  <li>
+                     <a href="#">ABOUT US <i class="fa fa-sort-desc"></i></a>
+                     <div class="sub-nav-links">
+                        <ul style="margin:auto; padding:0;">
+                           <li><a href="overview.php">OVERVIEW</a></li>
+                           <li><a href="about_team.php">OUR TEAM</a></li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li>
+                     <a href="#">PROJECTS <i class="fa fa-sort-desc"></i></a>
+                     <div class="sub-nav-links">
+                        <ul style="margin:auto; padding:0;">
+                           <li><a href="ongoing_projects.php">ONGOING</a></li>
+                           <li><a href="completed_projects.php">COMPLETED</a></li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li><a href="event.php">EVENTS</a></li>
+                  <li><a href="contact.php">CONTACT US</a></li>
+
+                  <?php
+                  if (isset($_SESSION["userName"])) {
+                      // If $_SESSION["userName"] is set, display the link
+                      echo '<li><a href="logout.php">LOGOUT</a></li>';
+                  } else {
+                      // If $_SESSION["userName"] is not set, display the alternative content
+                      echo '<li>
+                              <a href="login.php">Login <i class="fa fa-sort-desc"></i></a>
+                              <div class="sub-nav-links">
+                                  <ul>
+                                      <li><a href="login.php">Login</a></li>
+                                      <li><a href="index_admin.php">Admin</a></li>
+                                  </ul>
+                              </div>
+                            </li>';
+                  }
+                  ?>
+
+               </ul>
             </div>
         </nav>
         <h1>COMPLETED PROJECTS</h1>
@@ -50,55 +76,129 @@
 
 <!----------------------------------------Ongoing Projects---------------------------------------------------->
     <section class="ongoing">
+
+    <?php 
+            try{
+            $sql = "SELECT * FROM project WHERE projectStatus='completed'";
+
+            if (mysqli_query($conn, $sql))
+            {
+                $result = mysqli_query($conn, $sql);
+                $resultRows = mysqli_num_rows($result);
+
+                if ($resultRows > 0)
+                {
+                    while ($row = mysqli_fetch_assoc($result))
+                    { ?>
+                        
+                        <div class="card mt-2 mb-2">
+                        <h5 class="card-header"><?php echo $row['projectTitle'] ?></h5>
+                            <div class="card-body">
+                                <p class="card-text"> <?php echo $row['projectDesc'] ?></p>
+                                <?php
+
+                                if (isset($_SESSION["userName"]) && $_SESSION["role"] == "admin") {
+                                    // If $_SESSION["userName"] is set, display the link
+                                    echo '<a type="button" class="btn btn-info" style="padding-top: 8px; padding-bottom: 8px;" href="?showModal=true&projectId=' . $row['projectId'] . '">view</a>';
+                                }
+                                ?>
+
+                            </div>
+                        </div>
+
+                    <?php
+                    }
+            }
+            else
+            {
+        ?>
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h5><?php echo "Projects are not found"; ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            }
+        }
+    }
+            catch(mysqli_sql_exception $e)
+            {
+                // Handle the exception
+                header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
+                exit();
+            } 
+        ?>
         
-        <h3>Kalawana Mini Hydro Plant Feasibility Survey</h3>
-        <p>
-            A feasibility study was undertaken on the riverbanks of the Kaluganga in Kalawana to assess the viability of establishing a 
-            Mini Hydro Plant. As Geo Tech-Hub, we conducted both ground and drone surveys to create the Digital Elevation Model (DEM) and 
-            contour map of the designated area. This aided in pinpointing an appropriate site and examining the drainage structure. The 
-            project was initiated and successfully concluded in July 2023.
-        </p>
-
-       <h3>Generate high resolution orthophotos and digital elevation model (dtm) for construction of salinity 
-        barrier across nilwala river consultancy services for hydraulic design</h3>
-       <p>
-        The purpose of this high-accuracy UAV survey is to lay the groundwork for the identification of the +1.0m contour and the demarcation 
-        of the +0.6m contour (with respect to Mean Sea Level). This will enable the exact calculation of the inundation area during the gate 
-        closure period of the Matara Stage IV Water Supply Project. The survey will be initiated from the Salinity Barrier  and will extend 
-        within the flood bunds, passing through the Thudawa Pumping Station and the Thudawa Gravity Outlet. The approximate extent covers an 
-        area of 50 hectares (equivalent to 500,000 square meters). 
-       </p>
-
-       <h3>180Km Road Survey</h3>
-       <p>
-        The Sri Lankan Road Development Authority initiated a project to survey the centerlines of major roads along with a 50-meter buffer on 
-        either side. The optimal approach for completing this task was determined to be the utilization of UAVs (Unmanned Aerial Vehicles) for 
-        surveying the centerlines and buffers. In collaboration with Aero-Tech Engineering Survey (pvt) Ltd, Geo Tech-Hub undertook this 
-        project to survey a total of 180 kilometers within the Sabaragamuwa Province. The project was executed in two phases, commencing in 
-        February 2023 and concluding in July 2023.
-       </p>
-
-       <h3>InfoBhoomi phase</h3>
-       <p>
-        The InfoBhoomi Web-GIS platform is a pioneering project in Sri Lanka designed to address the complex challenges arising from rapid 
-        urbanization. By integrating dispersed data from local organizations onto a single web-based Geographic Information System (GIS) 
-        platform, InfoBhoomi empowers municipal decision-makers with essential information for effective urban planning. Following the smart 
-        city concept, the platform emphasizes the significance of accurate data to guide evidence-based decisions. InfoBhoomi utilizes the ISO 
-        19152 standard Land Administration Domain Model (LADM) to model spatial data, accommodating the intricate land tenure system. This 
-        framework seamlessly incorporates data from local authorized agencies, ensuring comprehensive insights and improved data 
-        interoperability. With its impact two-fold, InfoBhoomi supports informed decision-making for future city planning while also fostering 
-        the growth of startups and green jobs. By promoting smart and green urban development grounded in reliable data, the platform not only 
-        addresses urban challenges but also creates avenues for innovation and progress, particularly benefiting young entrepreneurs. In a 
-        world grappling with urbanization's complexities, InfoBhoomi stands as a catalyst for positive urban transformation.
-       </p>
 
 <!----------------------------------------Footer---------------------------------------------------->
 
+<!--Modal for view publications-->
+<div class="modal fade" id="editProject" tabindex="-1" aria-labelledby="editProjectLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Completed Projects</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <table class="table table-responsive-sm table-hover">
+            <?php 
+                try
+                    {
+                        if(isset($_GET['projectId'])){
+                            $projectId = $_GET['projectId'];
+                            // Now you can use $projectId in your SQL query or for any other purpose.
+                            $sql = "SELECT * FROM project WHERE projectId = $projectId";
 
+                            if (mysqli_query($conn, $sql))
+                        {
+                            $result = mysqli_query($conn, $sql);
+                            $resultRows = mysqli_num_rows($result);
+
+                            if ($resultRows > 0)
+
+                            {
+                                $row = $result->fetch_assoc()
+
+                                ?>
+                                    <form action="updateProjectCompleted.php?projectId=<?php echo $row['projectId'] ?>" method="POST">
+                                        <div class="mb-3">
+                                            <label class="form-label">Project Title</label>
+                                            <input type="text" name="projectTitle" value="<?php echo $row['projectTitle']; ?>" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                            <textarea class="form-control" name="projectDesc" id="exampleFormControlTextarea1" rows="10"><?php echo $row['projectDesc']; ?></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" name="projectUpdate" class="btn btn-secondary">Update</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                <?php
+                            }
+
+                        }
+                        }
+
+                        
+                    }
+                catch(mysqli_sql_exception $e)
+                    {
+                        // Handle the exception
+                        header("Location:index.php?showModal=true&status=unsuccess&message=Database error");
+                        exit();
+                    } ?>
+            </table>
+        </div>
+        
+        </div>
+    </div>
+</div>
 
 <footer class="footer">
-    <div class="contain">
-        <div class="row">
+    <div class="container" style="display: block; flex-direction: row; justify-content: space-between;">
+        <div class="footer-row" style="display:flex; flex-direction:row; justify-content:space-between;">
             <div class="footer-col">
                 <h4>DISCOVER</h4>
                 <ul>
@@ -123,8 +223,7 @@
                     <li><a href="#">Youtube</a></li>
                     <li><a href="#">Instagram</a></li>
                 </ul>
-            </div>
-            
+            </div>           
             <div class="footer-col">
                 <h4>CONTACT US</h4>
                 <ul>
@@ -135,7 +234,22 @@
     </div>
 </footer>
 
+<script>
+    $(document).ready(function(){
+    // check if the "showModal" parameter is present in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const showModal = urlParams.get('showModal');
+    if (showModal === 'true') {
+        // show the modal popup
+        $('#editProject').modal('show');
 
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
 </html>

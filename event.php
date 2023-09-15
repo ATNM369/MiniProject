@@ -1,100 +1,205 @@
+<?php
+    session_start();
+    include_once "db.php";
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Geo-Tech Hub</title>
-
-        <link rel="stylesheet" href="style.css">
-        
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!--Jquery-->
+	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        <!--Ajax-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
 
-<body>
-    <section class="sub-headerB">
-        <nav>
+    <body>
+      <section class="sub-headerB">
+         <nav>
             <a href="index.php"><img src="img/GeoTechHUB2.png"></a>
             <div class="nav-links">
-                <ul>
-                    <li><a href="index.php">HOME</a></li>
-                    <li><a href="#">ABOUT US <i class="fa fa-sort-desc"></i></a>
-                            <div class="sub-nav-links">
-                                <ul>
-                                    <li><a href="overview.php">OVERVIEW</a></li>
-                                    <li><a href="about_team.php">OUR TEAM</a></li>
-                                </ul>
-                            </div>
-                    </li>
-                    <li><a href="#">PROJECTS <i class="fa fa-sort-desc"></i></a>
-                        <div class="sub-nav-links">
-                            <ul>
-                                <li><a href="ongoing_projects.php">ONGOING</a></li>
-                                <li><a href="completed_projects.php">COMPLETED</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="">EVENTS</a></li>
-                    <li><a href="contact.php">CONTACT US</a></li>
-                   
-                    <li><a href="#">Login <i class="fa fa-sort-desc"></i></a>
-                        <div class="sub-nav-links">
-                            <ul>
-                                <li><a href="login.php">Login</a></li>
-                                <li><a href="index_admin.php">Admin</a></li>
-                </ul>
+               <ul style="margin-bottom:0;">
+                  <li><a href="index.php">HOME</a></li>
+                  <li>
+                     <a href="#">ABOUT US <i class="fa fa-sort-desc"></i></a>
+                     <div class="sub-nav-links">
+                        <ul style="margin:auto; padding:0;">
+                           <li><a href="overview.php">OVERVIEW</a></li>
+                           <li><a href="about_team.php">OUR TEAM</a></li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li>
+                     <a href="#">PROJECTS <i class="fa fa-sort-desc"></i></a>
+                     <div class="sub-nav-links">
+                        <ul style="margin:auto; padding:0;">
+                           <li><a href="ongoing_projects.php">ONGOING</a></li>
+                           <li><a href="completed_projects.php">COMPLETED</a></li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li><a href="event.php">EVENTS</a></li>
+                  <li><a href="contact.php">CONTACT US</a></li>
+
+                  <?php
+                  if (isset($_SESSION["userName"])) {
+                      // If $_SESSION["userName"] is set, display the link
+                      echo '<li><a href="logout.php">LOGOUT</a></li>';
+                  } else {
+                      // If $_SESSION["userName"] is not set, display the alternative content
+                      echo '<li>
+                              <a href="login.php">Login <i class="fa fa-sort-desc"></i></a>
+                              <div class="sub-nav-links">
+                                  <ul>
+                                      <li><a href="login.php">Login</a></li>
+                                      <li><a href="index_admin.php">Admin</a></li>
+                                  </ul>
+                              </div>
+                            </li>';
+                  }
+                  ?>
+
+               </ul>
             </div>
-        </nav>
-        <h1>EVENTS</h1>
+         </nav>
+         <h1>EVENTS</h1>
+      </section>
+
+
+<!----------------------------------------Ongoing Projects---------------------------------------------------->
+    <section class="ongoing">        
+        <?php 
+            try{
+            $sql = "SELECT * FROM events";
+
+            if (mysqli_query($conn, $sql))
+            {
+                $result = mysqli_query($conn, $sql);
+                $resultRows = mysqli_num_rows($result);
+
+                if ($resultRows > 0)
+                {
+                    while ($row = mysqli_fetch_assoc($result))
+                    { ?>
+                        
+                        <div class="card mt-2 mb-2">
+                        <h5 class="card-header"><?php echo $row['eventTitle'] ?></h5>
+                            <div class="card-body">
+                                <p class="card-text"> <?php echo $row['eventDesc'] ?></p>
+
+                                <?php
+                                if (isset($_SESSION["userName"]) && $_SESSION["role"] == "admin") {
+                                    // If $_SESSION["userName"] is set, display the link
+                                    echo '<a type="button" class="btn btn-info" style="padding-top: 8px; padding-bottom: 8px;" href="?showModal=true&eventId=' . $row['id'] . '">view</a>';
+                                }
+                                ?>                              
+                            </div>
+                        </div>
+
+                    <?php
+                    }
+            }
+            else
+            {
+        ?>
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h5><?php echo "Projects are not found"; ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            }
+        }
+    }
+            catch(mysqli_sql_exception $e)
+            {
+                // Handle the exception
+                header("Location:index.php?showModal=true&status=unsuccess&message=Database error");
+                exit();
+            } 
+        ?>
+        
     </section>
 
+<!----------------------------------------Footer---------------------------------------------------->
 
-<!------------------------------------------event content--------------------------------------------->
+<!--Modal for view publications-->
+<div class="modal fade" id="editEvent" tabindex="-1" aria-labelledby="editProjectLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Events</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <table class="table table-responsive-sm table-hover">
+            <?php 
+                try
+                    {
+                        if(isset($_GET['eventId'])){
+                            $eventId = $_GET['eventId'];
+                            // Now you can use $eventId in your SQL query or for any other purpose.
+                            $sql = "SELECT * FROM events WHERE id = $eventId";
 
-<section class="event">
+                            if (mysqli_query($conn, $sql))
+                        {
+                            $result = mysqli_query($conn, $sql);
+                            $resultRows = mysqli_num_rows($result);
 
-<div class="new">
-<div class="center-image">
-                <!--<img src="img/yuyu.jpg" alt="Event 1 Image"> -->
-            </div>
-            <h2>Advanced Techniques for Geospatial Mapping</h2>
+                            if ($resultRows > 0)
 
-    <p>Explore UAV-based Surveying & Lidar Tech in a 40-hour intensive course. Gain advanced skills in modern 
-        surveying using drones & Lidar. Ideal for professionals, students, and experts in geospatial fields. Learn UAV 
-        technology, Lidar principles, effective mission planning, and data processing. Real-world applications showcased. 
-        No strict prerequisites; basic understanding of geospatial concepts advantageous. Blended format with lectures, 
-        hands-on lab sessions, and field exercises. Elevate your career with cutting-edge geospatial knowledge. Enroll for 
-        a competitive edge in the ever-evolving industry.</p>
+                            {
+                                $row = $result->fetch_assoc()
+
+                                ?>
+                                    <form action="updateEvent.php?eventId=<?php echo $row['id'] ?>" method="POST">
+                                        <div class="mb-3">
+                                            <label class="form-label">Event Title</label>
+                                            <input type="text" name="eventTitle" value="<?php echo $row['eventTitle']; ?>" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                            <textarea class="form-control" name="eventDesc" id="exampleFormControlTextarea1" rows="10"><?php echo $row['eventDesc']; ?></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" name="eventUpdate" class="btn btn-secondary">Update</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                <?php
+                            }
+
+                        }
+                        }
+
+                        
+                    }
+                catch(mysqli_sql_exception $e)
+                    {
+                        // Handle the exception
+                        header("Location:index.php?showModal=true&status=unsuccess&message=Database error");
+                        exit();
+                    } ?>
+            </table>
+        </div>
         
-      </div>
-        <br><br>
-
-        <div class="new">
-            <!-- Centered Image with Text -->
-
-            <div class="center-image">
-                <!--<img src="img/yuyuyu.jpg" alt="Event 2 Image"> -->
-            </div>
-            <h2>Research Assistant Opportunities</h2>
-
-    <p>Innovative Low-Cost GNSS Receiver Development Project at Geo Tech-Hub Introduce a Low-Cost GNSS Receiver 
-        for Surveying and Geopolitical Industry: An approach for cost-effective precise positioning and mapping.<br><br>
-        Geo Tech-Hub is happy to announce an exciting research opportunity in collaboration with the UBLC, Sabaragamuwa 
-        University of Sri Lanka. We are launching an innovative project to develop a Low-Cost GNSS Receiver for Surveying and 
-        Geopolitical Industry, aimed at advancing positioning and mapping capabilities.
-        </p>
+        </div>
+    </div>
 </div>
-
-</section>
-
-<!--------------------------------------Footer---------------------------------------------------->
 
 
 
 <footer class="footer">
-    <div class="contain">
-        <div class="row">
+    <div class="container" style="display: block; flex-direction: row; justify-content: space-between;">
+        <div class="footer-row" style="display:flex; flex-direction:row; justify-content:space-between;">
             <div class="footer-col">
                 <h4>DISCOVER</h4>
                 <ul>
@@ -119,13 +224,7 @@
                     <li><a href="#">Youtube</a></li>
                     <li><a href="#">Instagram</a></li>
                 </ul>
-            </div>
-            <div class="footer-col">
-                <h4>RESEARCH CENTER</h4>
-                <ul>
-                    <li><a href="#">Help center</a></li>
-                </ul>
-            </div>
+            </div>           
             <div class="footer-col">
                 <h4>CONTACT US</h4>
                 <ul>
@@ -136,8 +235,21 @@
     </div>
 </footer>
 
+<script>
+    $(document).ready(function(){
+    // check if the "showModal" parameter is present in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const showModal = urlParams.get('showModal');
+    if (showModal === 'true') {
+        // show the modal popup
+        $('#editEvent').modal('show');
 
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    });
+</script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
-

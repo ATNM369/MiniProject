@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once "db.php";
 ?>
 
@@ -74,129 +75,125 @@
 
 
 <!----------------------------------------Ongoing Projects---------------------------------------------------->
-    <section class="ongoing">
-
-        
-
+    <section class="ongoing">        
         <?php 
-    try{
-    $sql = "SELECT * FROM project";
+            try{
+            $sql = "SELECT * FROM project WHERE projectStatus='ongoing'";
 
-    if (mysqli_query($conn, $sql))
-    {
-        $result = mysqli_query($conn, $sql);
-        $resultRows = mysqli_num_rows($result);
+            if (mysqli_query($conn, $sql))
+            {
+                $result = mysqli_query($conn, $sql);
+                $resultRows = mysqli_num_rows($result);
 
-        if ($resultRows > 0)
-        {
-            while ($row = mysqli_fetch_assoc($result))
-            { ?>
-                
-                <div class="card mt-2 mb-2">
-                <h5 class="card-header"><?php echo $row['projectTitle'] ?></h5>
-                    <div class="card-body">
-                        <p class="card-text"> <?php echo $row['projectDesc'] ?></p>
-                        <a
-                            type="button" 
-                            class="btn btn-info" 
-                            style="padding-top: 8px; padding-bottom: 8px;"
-                            href = "?showModal=true&projectId=<?php echo $row['projectId'] ?>"
-                        >
-                         view
-                        </a>
-                    </div>
-                </div>
+                if ($resultRows > 0)
+                {
+                    while ($row = mysqli_fetch_assoc($result))
+                    { ?>
+                        
+                        <div class="card mt-2 mb-2">
+                        <h5 class="card-header"><?php echo $row['projectTitle'] ?></h5>
+                            <div class="card-body">
+                                <p class="card-text"> <?php echo $row['projectDesc'] ?></p>
 
-            <?php
+                                <?php
+                                if (isset($_SESSION["userName"]) && $_SESSION["role"] == "admin") {
+                                    // If $_SESSION["userName"] is set, display the link
+                                    echo '<a type="button" class="btn btn-info" style="padding-top: 8px; padding-bottom: 8px;" href="?showModal=true&projectId=' . $row['projectId'] . '">view</a>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                    <?php
+                    }
             }
-    }
-    else
-    {
-    ?>
+            else
+            {
+        ?>
 
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <h5><?php echo "Projects are not found"; ?></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h5><?php echo "Projects are not found"; ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         <?php
             }
         }
     }
-    catch(mysqli_sql_exception $e)
-    {
-        // Handle the exception
-        header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
-        exit();
-    } ?>
+            catch(mysqli_sql_exception $e)
+            {
+                // Handle the exception
+                header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
+                exit();
+            } 
+        ?>
         
     </section>
 
 <!----------------------------------------Footer---------------------------------------------------->
 
-  <!--Modal for view publications-->
-  <div class="modal fade" id="editProject" tabindex="-1" aria-labelledby="editProjectLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Message</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-responsive-sm table-hover">
-                <?php 
-                    try
-                        {
-                            if(isset($_GET['projectId'])){
-                                $projectId = $_GET['projectId'];
-                                // Now you can use $projectId in your SQL query or for any other purpose.
-                                $sql = "SELECT * FROM project WHERE projectId = $projectId";
+<!--Modal for view publications-->
+<div class="modal fade" id="editProject" tabindex="-1" aria-labelledby="editProjectLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Ongoing Projects</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <table class="table table-responsive-sm table-hover">
+            <?php 
+                try
+                    {
+                        if(isset($_GET['projectId'])){
+                            $projectId = $_GET['projectId'];
+                            // Now you can use $projectId in your SQL query or for any other purpose.
+                            $sql = "SELECT * FROM project WHERE projectId = $projectId";
 
-                                if (mysqli_query($conn, $sql))
+                            if (mysqli_query($conn, $sql))
+                        {
+                            $result = mysqli_query($conn, $sql);
+                            $resultRows = mysqli_num_rows($result);
+
+                            if ($resultRows > 0)
+
                             {
-                                $result = mysqli_query($conn, $sql);
-                                $resultRows = mysqli_num_rows($result);
+                                $row = $result->fetch_assoc()
 
-                                if ($resultRows > 0)
-
-                                {
-                                    $row = $result->fetch_assoc()
-
-                                    ?>
-                                        <form action="updateProject.php?projectId=<?php echo $row['projectId'] ?>" method="POST">
-                                            <div class="mb-3">
-                                                <label class="form-label">Project Title</label>
-                                                <input type="text" name="projectTitle" value="<?php echo $row['projectTitle']; ?>" class="form-control">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                                                <textarea class="form-control" name="projectDesc" id="exampleFormControlTextarea1" rows="10"><?php echo $row['projectDesc']; ?></textarea>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" name="projectUpdate" class="btn btn-secondary">Update</button>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </form>
-                                    <?php
-                                }
-
-                            }
+                                ?>
+                                    <form action="updateProjectOngoing.php?projectId=<?php echo $row['projectId'] ?>" method="POST">
+                                        <div class="mb-3">
+                                            <label class="form-label">Project Title</label>
+                                            <input type="text" name="projectTitle" value="<?php echo $row['projectTitle']; ?>" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                            <textarea class="form-control" name="projectDesc" id="exampleFormControlTextarea1" rows="10"><?php echo $row['projectDesc']; ?></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" name="projectUpdate" class="btn btn-secondary">Update</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                <?php
                             }
 
-                            
                         }
-                    catch(mysqli_sql_exception $e)
-                        {
-                            // Handle the exception
-                            header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
-                            exit();
-                        } ?>
-                </table>
-            </div>
-            
-            </div>
+                        }
+
+                        
+                    }
+                catch(mysqli_sql_exception $e)
+                    {
+                        // Handle the exception
+                        header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
+                        exit();
+                    } ?>
+            </table>
+        </div>
+        
         </div>
     </div>
+</div>
 
 
 
