@@ -136,16 +136,17 @@
 
                 <input type="tel" name="phone" placeholder="Mobile number" ><br>
 
-            
-                <input type="password" placeholder="Password" id="pwd" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-
-
                 <div class="password-input">
-                    <input type="password" name="password" name="passwordrepeat" placeholder="Repeat the entered password" id="password" required>
-                    <i class="fa fa-eye-slash" id="eye-icon" aria-hidden="true"></i>
+                  <input type="password" placeholder="Password" id="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                  <i class="fa fa-eye-slash" id="eye-icon" aria-hidden="true"></i>
                 </div>
 
-                <input type="submit" name="signup",value="Register"><br>
+                
+                <input type="password" name="passwordrepeat" placeholder="Repeat the entered password" id="re-password" required>
+                    
+
+
+                <input type="submit" name="signup" value="Register"><br>
 
                 <br><p>Already have an account?<a href=login.php> Log in.</a></p></br>
             
@@ -163,7 +164,7 @@
 </div>
 
     <script>
-var myInput = document.getElementById("psw");
+var myInput = document.getElementById("password");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");
 var number = document.getElementById("number");

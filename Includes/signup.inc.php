@@ -13,14 +13,13 @@ if (isset($_POST["signup"])) {
     $pwdRepeat = $_POST["passwordrepeat"]; 
 
     $invalidUid = invalidUid($username);
-    $pwdMatch = pwdMatch($pwd , $pwdRepeat);
 
     if ($invalidUid !== false) {
         header("Location:../signup.php?error=invaliduid");
         exit();
     }
 
-    if ($pwdMatch !== false) {
+    if ($pwd !== $pwdRepeat) {
         header("Location:../signup.php?error=passwordsdontmatch");
         exit();
     }
