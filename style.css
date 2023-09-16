@@ -7,7 +7,7 @@
   min-height: 100vh;
   width: 100%;
   background-image: linear-gradient(rgba(1, 6, 27, 0.7), rgba(2, 9, 37, 0.7)),
-    url(img/geo1\\(1\).JPG);
+    url("img/geo1(1).JPG");
   background-position: center;
   background-size: cover;
   position: relative;
@@ -394,7 +394,7 @@ ul {
   height: 50vh;
   width: 100%;
   background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
-    url(img/geo1(3).JPG); /* Corrected URL */
+    url("img/geo1(3).JPG"); /* Corrected URL */
   background-position: center;
   background-size: cover;
   text-align: center;
@@ -527,7 +527,7 @@ ul {
   height: 50vh;
   width: 100%;
   background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
-    url(img/geo1\\(1\).JPG);
+    url("img/geo1(1).JPG");
   background-position: center;
   background-size: cover;
   text-align: center;
@@ -606,7 +606,7 @@ ul {
   height: 50vh;
   width: 100%;
   background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
-    url(img/geo1\\(6\).JPG);
+    url("img/geo1(6).JPG");
   background-position: center;
   background-size: cover;
   text-align: center;
@@ -643,7 +643,8 @@ ul {
   height: 50vh;
   width: 100%;
   background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
-    url(img/geo1\\(5\).JPG);
+    url("img/geo1(5).JPG");
+
   background-position: center;
   background-size: cover;
   text-align: center;
