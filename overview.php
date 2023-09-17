@@ -25,7 +25,7 @@
 
         </div>
         <div class="about-col">
-            <img src="img/geo1 (2).JPG">
+            <img src="img/geo1(2).JPG">
         </div>
     </div>
 
