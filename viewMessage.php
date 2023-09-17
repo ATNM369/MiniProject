@@ -176,6 +176,16 @@
                                             View
                                         </a> 
                                     </div>
+                                    <div>
+                                        <a  
+                                            type="button" 
+                                            class="btn btn-danger" 
+                                            style="padding-top: 8px; padding-bottom: 8px;"
+                                            href="deletemessage.php?messageid=<?php echo $row["id"] ?>"
+                                            >    
+                                            Delete
+                                        </a> 
+                                    </div>
                                 </div>   
                             </td>
                         </tr>
@@ -230,8 +240,8 @@ catch(mysqli_sql_exception $e)
 
                             if ($resultRows > 0)
                             {
-                                while ($row = mysqli_fetch_assoc($result))
-                                { ?>
+                                $row = mysqli_fetch_assoc($result) 
+                            ?>
                                 <tr>
                                     <td><strong>Name</strong></td>
                                     <td>
@@ -258,7 +268,6 @@ catch(mysqli_sql_exception $e)
                                 </tr>
                                     <?php
                                 }
-                            }
                             else
                             {
                     ?>

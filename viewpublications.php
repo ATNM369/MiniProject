@@ -1,19 +1,17 @@
-<?php 
-    session_start();
-    if(!isset($_SESSION['userName']) ){      
-        header ('Location:index.php');
-        exit;
-    }elseif(isset($_SESSION['role'])){
-        if($_SESSION["role"] !== "admin"){
-            header ('Location:index.php');
-            exit;
-        }
+<?php
+session_start();
+if (!isset($_SESSION["userName"])) {
+    header("Location:index.php");
+    exit();
+} elseif (isset($_SESSION["role"])) {
+    if ($_SESSION["role"] !== "admin") {
+        header("Location:index.php");
+        exit();
     }
+}
 ?>
 
-<?php
-     include_once 'db.php';
-?>
+<?php include_once "db.php"; ?>
 
 
 <!DOCTYPE html>
@@ -148,19 +146,15 @@
         </tr>
       </thead>
       <tbody>
-    <?php try
-{
-    $sql = "SELECT * FROM publications";
+    <?php try {
+        $sql = "SELECT * FROM publications";
 
-    if (mysqli_query($conn, $sql))
-    {
-        $result = mysqli_query($conn, $sql);
-        $resultRows = mysqli_num_rows($result);
+        if (mysqli_query($conn, $sql)) {
+            $result = mysqli_query($conn, $sql);
+            $resultRows = mysqli_num_rows($result);
 
-        if ($resultRows > 0)
-        {
-            while ($row = mysqli_fetch_assoc($result))
-            { ?>
+            if ($resultRows > 0) {
+                while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
                             <td><?php echo $row["fullName"]; ?></td>
                             <td><?php echo $row["affiliation"]; ?></td>
@@ -191,7 +185,9 @@
                                         </a> 
                                     </div>
                                     <div>
-                                        <a href="deletepublication.php?publicationid=<?php echo $row['id'] ?>"  
+                                        <a href="deletepublication.php?publicationid=<?php echo $row[
+                                            "id"
+                                        ]; ?>"  
                                             type="button" 
                                             class="btn btn-danger" 
                                             style="padding-top: 8px; padding-bottom: 8px;"
@@ -203,12 +199,9 @@
                             </td>
                         </tr>
 
-                        <?php
-            }
-        }
-        else
-        {
-?>
+                        <?php }
+            } else {
+                 ?>
 
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h5><?php echo "Publication applications are not found"; ?></h5>
@@ -216,15 +209,15 @@
             </div>
 
             <?php
+            }
         }
-    }
-}
-catch(mysqli_sql_exception $e)
-{
-    // Handle the exception
-    header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
-    exit();
-} ?>
+    } catch (mysqli_sql_exception $e) {
+        // Handle the exception
+        header(
+            "Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error"
+        );
+        exit();
+    } ?>
       </tbody>
     </table>
 </div>
@@ -241,139 +234,111 @@ catch(mysqli_sql_exception $e)
             </div>
             <div class="modal-body">
                 <table class="table table-responsive-sm table-hover">
-                <?php 
-                try
-                    {
-                        $sql = "SELECT * FROM publications";
+                <?php try {
+                    $sql = "SELECT * FROM publications";
 
-                        if (mysqli_query($conn, $sql))
-                        {
-                            $result = mysqli_query($conn, $sql);
-                            $resultRows = mysqli_num_rows($result);
+                    if (mysqli_query($conn, $sql)) {
+                        $result = mysqli_query($conn, $sql);
+                        $resultRows = mysqli_num_rows($result);
 
-                            if ($resultRows > 0)
-                            {
-                                while ($row = mysqli_fetch_assoc($result))
-                                { ?>
+                        if ($resultRows > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
                                     <td><strong>Full Name</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row["fullName"];;
-                                        ?>	
+                                        <?php echo $row["fullName"]; ?>	
                                     </td>						
                                 </tr>
                                 <tr>
                                     <td><strong>Affiliation</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row["affiliation"];;
-                                        ?>	
+                                        <?php echo $row["affiliation"]; ?>	
                                     </td>						
                                 </tr>
                                 <tr>
                                     <td><strong>Email</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row["emailAddress"]; 
-                                        ?>	
+                                        <?php echo $row["emailAddress"]; ?>	
                                     </td>						
                                 </tr>
                                 <tr>
                                     <td><strong>Mobile</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row["phoneNumber"];
-                                        ?>	
+                                        <?php echo $row["phoneNumber"]; ?>	
                                     </td>						
                                 </tr>
                                 <tr>
                                     <td><strong>Research Title</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row["titleOfResearch"];
-                                        ?>	
+                                        <?php echo $row["titleOfResearch"]; ?>	
                                     </td>						
                                 </tr>
                                 <tr>
                                     <td><strong>abstract</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row["abstract"];
-                                        ?>	
+                                        <?php echo $row["abstract"]; ?>	
                                     </td>						
                                 </tr>
                                 <tr>
                                     <td><strong>keywords</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row['keywords'];                               
-                                        ?>	
+                                        <?php echo $row["keywords"]; ?>	
                                     </td>						
                                 </tr>
                                 <tr>
                                     <td><strong>copyrightStatement</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row['copyrightStatement'];                                  
-                                        ?>	
+                                        <?php echo $row[
+                                            "copyrightStatement"
+                                        ]; ?>	
                                     </td>						
                                 </tr>     
                                 <tr>
                                     <td><strong>permissionToPublish</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row['permissionToPublish'];                                  
-                                        ?>	
+                                        <?php echo $row[
+                                            "permissionToPublish"
+                                        ]; ?>	
                                     </td>						
                                 </tr>     
                                 <tr>
                                     <td><strong>coAuthor</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row['coAuthor'];                                  
-                                        ?>	
+                                        <?php echo $row["coAuthor"]; ?>	
                                     </td>						
                                 </tr>     
                                 <tr>
                                     <td><strong>authorBiography</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row['authorBiography'];                                  
-                                        ?>	
+                                        <?php echo $row["authorBiography"]; ?>	
                                     </td>						
                                 </tr>     
                                 <tr>
                                     <td><strong>citationFormat</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row['citationFormat'];                                  
-                                        ?>	
+                                        <?php echo $row["citationFormat"]; ?>	
                                     </td>						
                                 </tr>     
                                 <tr>
                                     <td><strong>attributionPreferences</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row['attributionPreferences'];                                  
-                                        ?>	
+                                        <?php echo $row[
+                                            "attributionPreferences"
+                                        ]; ?>	
                                     </td>						
                                 </tr>     
                                 <tr>
                                     <td><strong>desiredPublicationDate</strong></td>
                                     <td>
-                                        <?php
-                                            echo $row['desiredPublicationDate'];                                  
-                                        ?>	
+                                        <?php echo $row[
+                                            "desiredPublicationDate"
+                                        ]; ?>	
                                     </td>						
                                 </tr>     
 
-                                    <?php
-                                }
-                            }
-                            else
-                            {
-                    ?>
+                                    <?php }
+                        } else {
+                             ?>
 
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <h5><?php echo "Attendance are not found in this session"; ?></h5>
@@ -381,15 +346,15 @@ catch(mysqli_sql_exception $e)
                                 </div>
 
                                 <?php
-                            }
                         }
                     }
-                    catch(mysqli_sql_exception $e)
-                    {
-                        // Handle the exception
-                        header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
-                        exit();
-                    } ?>
+                } catch (mysqli_sql_exception $e) {
+                    // Handle the exception
+                    header(
+                        "Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error"
+                    );
+                    exit();
+                } ?>
                 </table>
             </div>
             <div class="modal-footer">
