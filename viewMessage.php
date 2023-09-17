@@ -127,7 +127,7 @@
             <a href="admin.php">Home</a>
             <a href="about_team.php">About Us</a>
             <a href="ongoing_projects.php">Projects</a>
-            <a href="#">Events</a>
+            <a href="event.php">Events</a>
             <a href="viewMessage.php">Messages</a>
             <a href="index.php">Log Out</a>
         </div>
@@ -198,7 +198,7 @@
 ?>
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <h5><?php echo "Publication applications are not found"; ?></h5>
+        <h5><?php echo "Messages are not found"; ?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 

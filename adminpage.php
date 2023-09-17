@@ -100,10 +100,10 @@
     <div class="container-fluid">
         <div class="sidebar">
             <div class="profile-photo"></div>
-            <a href="index.php">Home</a>
+            <a href="index12.php">Home</a>
             <a href="about_team.php">About Us</a>
             <a href="ongoing_projects.php">Projects</a>
-            <a href="#">Events</a>
+            <a href="event.php">Events</a>
             <a href="viewMessage.php">Messages</a>
             <a href="logout.php">Log Out</a>
         </div>

@@ -125,8 +125,9 @@ if (!isset($_SESSION["userName"])) {
             <a href="admin.php">Home</a>
             <a href="about_team.php">About Us</a>
             <a href="ongoing_projects.php">Projects</a>
-            <a href="#">Events</a>
-            <a href="index.php">Log Out</a>
+            <a href="event.php">Events</a>
+            <a href="viewMessage.php">Messages</a>
+            <a href="logout.php">Log Out</a>
         </div>
 
         <div class="content">
