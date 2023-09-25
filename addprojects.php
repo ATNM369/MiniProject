@@ -23,9 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             VALUES ('$fullName', '$Address', '$EmailAddress', '$PhoneNumber', '$dob', '$HEL', '$AcademicBackground', '$PreviousWorkExperience', '$JobResponsibilities', '$SkillsAndCompetencies')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Project application submitted successfully.";
+        echo "Project application submitted successfully.<br><br>";
+        echo '<a href="index1.php" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Go to Home Page</a>';
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
+        
     }
 
     // Close the database connection

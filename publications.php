@@ -10,14 +10,25 @@
         <title>Geo-Tech Hub</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        
         <!--Jquery-->
 	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         
         <!--Ajax-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <style>
+            img, svg {
+                vertical-align: baseline !important;
+            }
+        </style>
+        
         <link rel="stylesheet" href="style.css">
     </head>
 
@@ -79,7 +90,7 @@
     <section class="ongoing">        
         <?php 
             try{
-            $sql = "SELECT * FROM publications";
+            $sql = "SELECT * FROM publications WHERE verified = 1";
 
             if (mysqli_query($conn, $sql))
             {
