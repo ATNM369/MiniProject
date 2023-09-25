@@ -38,8 +38,9 @@
                         </ul>
                     </div>
                 </li>
-                    <li><a href="event.php">EVENTS</a></li>
-                    <li><a href="contact.php">CONTACT US</a></li>
+                <li><a href="publications.php">PUBLICATIONS</a></li>
+                <li><a href="event.php">EVENTS</a></li>
+                <li><a href="contact.php">CONTACT US</a></li>
                     <?php
                   if (isset($_SESSION["userName"])) {
                       // If $_SESSION["userName"] is set, display the link

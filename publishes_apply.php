@@ -99,7 +99,7 @@
                 <h3>Manuscript or Research Document</h3>
 
                 <label for="fileUpload">Upload a File:</label>
-                <input type="file" id="fileUpload" name="pdfFile">
+                <input type="file" id="fileUpload" name="pdfFile" required>
 
                 <h3>Permissions and Copyright</h3>
                 

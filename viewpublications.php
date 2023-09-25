@@ -13,23 +13,21 @@ if (!isset($_SESSION["userName"])) {
 
 <?php include_once "db.php"; ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - view publishes</title>
+    <title>Admin Dashboard - View Publications</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!--Jquery-->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!--Ajax-->
+    <!-- Ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <style>
@@ -39,6 +37,7 @@ if (!isset($_SESSION["userName"])) {
             margin: 0;
             padding: 0;
         }
+
         .container {
             display: flex;
             height: 100vh;
@@ -56,6 +55,7 @@ if (!isset($_SESSION["userName"])) {
             bottom: 0;
             overflow-y: auto;
         }
+
         .sidebar a {
             display: block;
             color: #fff;
@@ -63,9 +63,11 @@ if (!isset($_SESSION["userName"])) {
             padding: 16px;
             text-decoration: none;
         }
+
         .sidebar a:hover {
             background-color: #555;
         }
+
         .profile-photo {
             width: 80px;
             height: 80px;
@@ -91,6 +93,7 @@ if (!isset($_SESSION["userName"])) {
             border-radius: 10px;
             margin-bottom: 20px;
         }
+
         .section h2 {
             margin-top: 0;
         }
@@ -105,6 +108,7 @@ if (!isset($_SESSION["userName"])) {
             cursor: pointer;
             margin-right: 10px; /* Spacing between buttons */
         }
+
         .creative-button:hover {
             background-color: #6e2005; /* Change hover color */
         }
@@ -113,6 +117,7 @@ if (!isset($_SESSION["userName"])) {
         #attendance-table thead tr th {
             text-align: center;
         }
+
         #attendance-table tbody tr td {
             text-align: center;
         }
@@ -131,23 +136,121 @@ if (!isset($_SESSION["userName"])) {
         </div>
 
         <div class="content">
-            
-        <div class="session-table">
+            <div class="session-table">
+                <table class="table table-light table-hover" id="attendance-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Affiliation</th>
+                            <th scope="col">Research Title</th>
+                            <th scope="col">Abstract</th>
+                            <th scope="col">Keywords</th>
+                            <th scope="col">Author Biography</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        try {
+                            $sql = "SELECT * FROM publications";
 
-    <table class="table table-light table-hover" id="attendance-table">
-      <thead>
-        <tr>
-          <th scope="col">Full Name</th>
-          <th scope="col">Affiliation</th>
-          <th scope="col">Research Title</th>
-          <th scope="col">Abstract</th>
-          <th scope="col">Keywords</th>
-          <th scope="col">Author Biography</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-    <?php try {
+                            if (mysqli_query($conn, $sql)) {
+                                $result = mysqli_query($conn, $sql);
+                                $resultRows = mysqli_num_rows($result);
+
+                                if ($resultRows > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row["fullName"]; ?></td>
+                                            <td><?php echo $row["affiliation"]; ?></td>
+                                            <td><?php echo $row["titleOfResearch"]; ?></td>
+                                            <td><?php echo $row["abstract"]; ?></td>
+                                            <td><?php echo $row["keywords"]; ?></td>
+                                            <td><?php echo $row["authorBiography"]; ?></td>
+                                            <td>
+                                                <div style="display:flex; flex-direction:row; align-items:center; justify-content:center; gap:5px;">
+                                                    <div>
+                                                        <a href="gen_pdf_publications.php"  
+                                                            type="button" 
+                                                            class="btn btn-primary" 
+                                                            style="padding-top: 8px; padding-bottom: 8px;"
+                                                            > 
+                                                            Dowload
+                                                        </a> 
+                                                    </div>
+                                                    <div>
+                                                        <a  
+                                                            type="button" 
+                                                            class="btn btn-info" 
+                                                            style="padding-top: 8px; padding-bottom: 8px;"
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#exampleModal_<?php echo $row['id']; ?>"
+                                                            > 
+                                                            View
+                                                        </a> 
+                                                    </div>
+                                                    <div>
+                                                        <a href="deletepublication.php?publicationid=<?php echo $row['id']; ?>"  
+                                                            type="button" 
+                                                            class="btn btn-danger" 
+                                                            style="padding-top: 8px; padding-bottom: 8px;"
+                                                            > 
+                                                            Delete
+                                                        </a> 
+                                                    </div>
+                                                    <?php if ($row["verified"] == 0): ?>
+                                                        <div>
+                                                            <a href="verifyPublication.php?action=verify&publicationid=<?php echo $row['id']; ?>"  
+                                                                type="button" 
+                                                                class="btn btn-warning" 
+                                                                style="padding-top: 8px; padding-bottom: 8px;"
+                                                            > 
+                                                                Verify
+                                                            </a> 
+                                                        </div>
+
+                                                    <?php elseif ($row["verified"] == 1): ?>
+                                                        <div>
+                                                            <button   
+                                                                type="button" 
+                                                                class="btn btn-success" 
+                                                                style="padding-top: 8px; padding-bottom: 8px;"
+                                                            > 
+                                                                Verified
+                                                            </button> 
+                                                        </div>
+                                                    <?php endif; ?>
+
+                                                </div>   
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <h5><?php echo "Publication applications are not found"; ?></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                        } catch (mysqli_sql_exception $e) {
+                            // Handle the exception
+                            header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
+                            exit();
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals for view publications -->
+    <?php
+    try {
         $sql = "SELECT * FROM publications";
 
         if (mysqli_query($conn, $sql)) {
@@ -155,224 +258,100 @@ if (!isset($_SESSION["userName"])) {
             $resultRows = mysqli_num_rows($result);
 
             if ($resultRows > 0) {
-                while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <tr>
-                            <td><?php echo $row["fullName"]; ?></td>
-                            <td><?php echo $row["affiliation"]; ?></td>
-                            <td><?php echo $row["titleOfResearch"]; ?></td>
-                            <td><?php echo $row["abstract"]; ?></td>
-                            <td><?php echo $row["keywords"]; ?></td>
-                            <td><?php echo $row["authorBiography"]; ?></td>
-                            <td>
-                                <div style="display:flex; flex-direction:row; align-atems:center; justify-content:center; gap:5px;">
-                                    <div>
-                                        <a href="gen_pdf_publications.php"  
-                                            type="button" 
-                                            class="btn btn-primary" 
-                                            style="padding-top: 8px; padding-bottom: 8px;"
-                                            > 
-                                            Dowload
-                                        </a> 
-                                    </div>
-                                    <div>
-                                        <a  
-                                            type="button" 
-                                            class="btn btn-info" 
-                                            style="padding-top: 8px; padding-bottom: 8px;"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal"
-                                            > 
-                                            View
-                                        </a> 
-                                    </div>
-                                    <div>
-                                        <a href="deletepublication.php?publicationid=<?php echo $row[
-                                            "id"
-                                        ]; ?>"  
-                                            type="button" 
-                                            class="btn btn-danger" 
-                                            style="padding-top: 8px; padding-bottom: 8px;"
-                                            > 
-                                            Delete
-                                        </a> 
-                                    </div>
-                                </div>   
-                            </td>
-                        </tr>
-
-                        <?php }
-            } else {
-                 ?>
-
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h5><?php echo "Publication applications are not found"; ?></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-
-            <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                    <div class="modal fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Publication Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-responsive-sm table-hover">
+                                        <tr>
+                                            <td><strong>Full Name</strong></td>
+                                            <td><?php echo $row["fullName"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Affiliation</strong></td>
+                                            <td><?php echo $row["affiliation"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Email</strong></td>
+                                            <td><?php echo $row["emailAddress"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Mobile</strong></td>
+                                            <td><?php echo $row["phoneNumber"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Research Title</strong></td>
+                                            <td><?php echo $row["titleOfResearch"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Abstract</strong></td>
+                                            <td><?php echo $row["abstract"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Keywords</strong></td>
+                                            <td><?php echo $row["keywords"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Copyright Statement</strong></td>
+                                            <td><?php echo $row["copyrightStatement"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Permission to Publish</strong></td>
+                                            <td><?php echo $row["permissionToPublish"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Co-Author</strong></td>
+                                            <td><?php echo $row["coAuthor"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Author Biography</strong></td>
+                                            <td><?php echo $row["authorBiography"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Citation Format</strong></td>
+                                            <td><?php echo $row["citationFormat"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Attribution Preferences</strong></td>
+                                            <td><?php echo $row["attributionPreferences"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Desired Publication Date</strong></td>
+                                            <td><?php echo $row["desiredPublicationDate"]; ?></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <a href="pdf_publications.php?id=<?php echo $row['id']; ?>" type="button" class="btn btn-primary">Download Research Paper</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
             }
         }
     } catch (mysqli_sql_exception $e) {
         // Handle the exception
-        header(
-            "Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error"
-        );
+        header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
         exit();
-    } ?>
-      </tbody>
-    </table>
-</div>
-        </div>
-    </div>
-
-    <!--Modal for view publications-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Publication Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-responsive-sm table-hover">
-                <?php try {
-                    $sql = "SELECT * FROM publications";
-
-                    if (mysqli_query($conn, $sql)) {
-                        $result = mysqli_query($conn, $sql);
-                        $resultRows = mysqli_num_rows($result);
-
-                        if ($resultRows > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) { ?>
-                                <tr>
-                                    <td><strong>Full Name</strong></td>
-                                    <td>
-                                        <?php echo $row["fullName"]; ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Affiliation</strong></td>
-                                    <td>
-                                        <?php echo $row["affiliation"]; ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Email</strong></td>
-                                    <td>
-                                        <?php echo $row["emailAddress"]; ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Mobile</strong></td>
-                                    <td>
-                                        <?php echo $row["phoneNumber"]; ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Research Title</strong></td>
-                                    <td>
-                                        <?php echo $row["titleOfResearch"]; ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>abstract</strong></td>
-                                    <td>
-                                        <?php echo $row["abstract"]; ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>keywords</strong></td>
-                                    <td>
-                                        <?php echo $row["keywords"]; ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>copyrightStatement</strong></td>
-                                    <td>
-                                        <?php echo $row[
-                                            "copyrightStatement"
-                                        ]; ?>	
-                                    </td>						
-                                </tr>     
-                                <tr>
-                                    <td><strong>permissionToPublish</strong></td>
-                                    <td>
-                                        <?php echo $row[
-                                            "permissionToPublish"
-                                        ]; ?>	
-                                    </td>						
-                                </tr>     
-                                <tr>
-                                    <td><strong>coAuthor</strong></td>
-                                    <td>
-                                        <?php echo $row["coAuthor"]; ?>	
-                                    </td>						
-                                </tr>     
-                                <tr>
-                                    <td><strong>authorBiography</strong></td>
-                                    <td>
-                                        <?php echo $row["authorBiography"]; ?>	
-                                    </td>						
-                                </tr>     
-                                <tr>
-                                    <td><strong>citationFormat</strong></td>
-                                    <td>
-                                        <?php echo $row["citationFormat"]; ?>	
-                                    </td>						
-                                </tr>     
-                                <tr>
-                                    <td><strong>attributionPreferences</strong></td>
-                                    <td>
-                                        <?php echo $row[
-                                            "attributionPreferences"
-                                        ]; ?>	
-                                    </td>						
-                                </tr>     
-                                <tr>
-                                    <td><strong>desiredPublicationDate</strong></td>
-                                    <td>
-                                        <?php echo $row[
-                                            "desiredPublicationDate"
-                                        ]; ?>	
-                                    </td>						
-                                </tr>     
-
-                                    <?php }
-                        } else {
-                             ?>
-
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <h5><?php echo "Attendance are not found in this session"; ?></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-
-                                <?php
-                        }
-                    }
-                } catch (mysqli_sql_exception $e) {
-                    // Handle the exception
-                    header(
-                        "Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error"
-                    );
-                    exit();
-                } ?>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-            </div>
-            </div>
-        </div>
-    </div>
+    }
+    ?>
 
     <!-- Scripts for DataTables -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script>
-    $(document).ready(function () {
-    $("#attendance-table").DataTable();
-    });
+        $(document).ready(function () {
+            $("#attendance-table").DataTable();
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
