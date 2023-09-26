@@ -170,8 +170,7 @@
                                             type="button" 
                                             class="btn btn-info" 
                                             style="padding-top: 8px; padding-bottom: 8px;"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal"
+                                            href="?showModal=true&messageid=<?php echo $row["id"]; ?>"
                                             > 
                                             View
                                         </a> 
@@ -219,83 +218,109 @@ catch(mysqli_sql_exception $e)
     </div>
 
     <!--Modal for view publications-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Message</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-responsive-sm table-hover">
-                <?php 
-                try
-                    {
-                        $sql = "SELECT * FROM message";
-
-                        if (mysqli_query($conn, $sql))
+                <div class="modal-header">
+                    <h5 class="modal-title">Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-responsive-sm table-hover">
+                        <?php 
+                        try
                         {
-                            $result = mysqli_query($conn, $sql);
-                            $resultRows = mysqli_num_rows($result);
+                            $messageIdParam = isset($_GET['messageid']) ? $_GET['messageid'] : null;
 
-                            if ($resultRows > 0)
-                            {
-                                $row = mysqli_fetch_assoc($result) 
-                            ?>
-                                <tr>
-                                    <td><strong>Name</strong></td>
-                                    <td>
+                            if ($messageIdParam !== null) {
+                                $sql = "SELECT * FROM message WHERE id = " . $messageIdParam;
+
+                                if (mysqli_query($conn, $sql))
+                                {
+                                    $result = mysqli_query($conn, $sql);
+                                    $resultRows = mysqli_num_rows($result);
+
+                                    if ($resultRows > 0)
+                                    {
+                                        $row = mysqli_fetch_assoc($result);
+                                        ?>
+                                        <tr>
+                                            <td><strong>Name</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row["name"];
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Email</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row["email"];
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Message</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row["message"]; 
+                                                ?>	
+                                            </td>						
+                                        </tr>
                                         <?php
-                                            echo $row["name"];;
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Email</strong></td>
-                                    <td>
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <h5><?php echo "Message not found"; ?></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
                                         <?php
-                                            echo $row["email"];;
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Message</strong></td>
-                                    <td>
-                                        <?php
-                                            echo $row["message"]; 
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                    <?php
+                                    }
                                 }
+                            }
                             else
                             {
-                    ?>
-
+                                ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <h5><?php echo "Attendance are not found in this session"; ?></h5>
+                                    <h5><?php echo "Message ID not provided in the URL"; ?></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-
                                 <?php
                             }
                         }
-                    }
-                    catch(mysqli_sql_exception $e)
-                    {
-                        // Handle the exception
-                        header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
-                        exit();
-                    } ?>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-            </div>
+                        catch(mysqli_sql_exception $e)
+                        {
+                            // Handle the exception
+                            header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
+                            exit();
+                        }
+                        ?>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function(){
+        // check if the "showModal" parameter is present in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const showModal = urlParams.get('showModal');
+        if (showModal === 'true') {
+            // show the modal popup
+            $('#messageModal').modal('show');
+            //jQuery code to clear URL parameters on modal close with delay
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+        });
+    </script>
 
     <!-- Scripts for DataTables -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
