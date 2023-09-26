@@ -172,7 +172,7 @@
                             <td>
                                 <div style="display:flex; flex-direction:row; align-atems:center; justify-content:center; gap:5px;">
                                     <div>
-                                        <a href="gen_pdf_services.php"  
+                                        <a href="gen_pdf_services.php?serviceId=<?php echo $row["id"]; ?>"  
                                             type="button" 
                                             class="btn btn-primary" 
                                             style="padding-top: 8px; padding-bottom: 8px;"

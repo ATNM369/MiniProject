@@ -1,4 +1,9 @@
 <?php
+
+if(isset($_GET["serviceId"])){
+    $serviceId = $_GET["serviceId"];
+}
+
 require('fpdf/fpdf.php'); 
 
 class PDF extends FPDF
@@ -31,21 +36,21 @@ try {
         die("Connection failed: " . $connection->connect_error);
     }
     
-    $query = "SELECT * FROM projects ";
+    $query = "SELECT * FROM services WHERE id = $serviceId";
 
     $result_set = $connection->query($query);
 
     while ($row = $result_set->fetch_assoc()) {
         $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(0, 10, "Full Name: " . $row["fullName"], 0, 1);
-        $pdf->Cell(0, 10, "Address: " . $row["Address"], 0, 1);
-        $pdf->Cell(0, 10, "Email Address: " . $row["EmailAddress"], 0, 1);
-        $pdf->Cell(0, 10, "DOB: " . $row["dob"], 0, 1);
-        $pdf->Cell(0, 10, "HEL: " . $row["HEL"], 0, 1);
-        $pdf->Cell(0, 10, "AcademicBackground: " . $row["AcademicBackground"], 0, 1);
-        $pdf->Cell(0, 10, "PreviousWorkExperience: " . $row["PreviousWorkExperience"], 0, 1);
-        $pdf->Cell(0, 10, "JobResponsibilities: " . $row["JobResponsibilities"], 0, 1);
-        $pdf->Cell(0, 10, "SkillsAndCompetencies: " . $row["SkillsAndCompetencies"], 0, 1);
+        $pdf->Cell(0, 10, "Organization: " . $row["organization"], 0, 1);
+        $pdf->Cell(0, 10, "Address: " . $row["address"], 0, 1);
+        $pdf->Cell(0, 10, "Email: " . $row["email"], 0, 1);
+        $pdf->Cell(0, 10, "Mobile Number: " . $row["phoneNumber"], 0, 1);
+        $pdf->Cell(0, 10, "Type of services: " . $row["typeOfServices"], 0, 1);
+        $pdf->Cell(0, 10, "Services Description: " . $row["servicesDescription"], 0, 1);
+        $pdf->Cell(0, 10, "Time Line: " . $row["timeLine"], 0, 1);
+        $pdf->Cell(0, 10, "Budget: " . $row["budget"], 0, 1);
         $pdf->Ln(10); 
     }
     
