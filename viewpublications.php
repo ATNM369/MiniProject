@@ -171,7 +171,7 @@ if (!isset($_SESSION["userName"])) {
                                             <td>
                                                 <div style="display:flex; flex-direction:row; align-items:center; justify-content:center; gap:5px;">
                                                     <div>
-                                                        <a href="gen_pdf_publications.php"  
+                                                        <a href="gen_pdf_publications.php?publicationId=<?php echo $row["id"]; ?>"  
                                                             type="button" 
                                                             class="btn btn-primary" 
                                                             style="padding-top: 8px; padding-bottom: 8px;"

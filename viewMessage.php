@@ -217,7 +217,7 @@ catch(mysqli_sql_exception $e)
         </div>
     </div>
 
-    <!--Modal for view publications-->
+    <!--Modal for view messages-->
     <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">

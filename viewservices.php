@@ -185,8 +185,7 @@
                                             type="button" 
                                             class="btn btn-info" 
                                             style="padding-top: 8px; padding-bottom: 8px;"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal"
+                                            href="?showModal=true&serviceid=<?php echo $row["id"]; ?>"
                                             > 
                                             View
                                         </a> 
@@ -233,7 +232,7 @@ catch(mysqli_sql_exception $e)
     </div>
 
     <!--Modal for view details-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -245,7 +244,11 @@ catch(mysqli_sql_exception $e)
                 <?php 
                 try
                     {
-                        $sql = "SELECT * FROM services";
+
+                        $serviceIdParam = isset($_GET['serviceid']) ? $_GET['serviceid'] : null;
+
+                        if($serviceIdParam !== null){
+                            $sql = "SELECT * FROM services WHERE id = $serviceIdParam ";
 
                         if (mysqli_query($conn, $sql))
                         {
@@ -344,6 +347,7 @@ catch(mysqli_sql_exception $e)
                                 <?php
                             }
                         }
+                        }
                     }
                     catch(mysqli_sql_exception $e)
                     {
@@ -360,6 +364,20 @@ catch(mysqli_sql_exception $e)
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+        // check if the "showModal" parameter is present in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const showModal = urlParams.get('showModal');
+        if (showModal === 'true') {
+            // show the modal popup
+            $('#serviceModal').modal('show');
+            //jQuery code to clear URL parameters on modal close with delay
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+        });
+    </script>
 
     <!-- Scripts for DataTables -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
