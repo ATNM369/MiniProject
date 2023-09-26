@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <title>Sign Up</title>
-    <link rel="stylesheet" href=
-"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body, h1, p, input, button {
             margin: 0;

@@ -254,7 +254,8 @@
 <section class="softwares">
     <h1>Softwares</h1>
     <p>The Geo-Tech HUB of Sabaragamuwa University of Sri Lanka(SUSL) established under the 
-        guidance of the University Grants Co
+        software applications used by employees in this company to perform
+        their duties,including mapping and designing tasks.
     </p>
     
     <div class="row">

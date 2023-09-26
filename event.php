@@ -68,6 +68,16 @@
                   }
                   ?>
 
+
+                    <?php
+                    if (isset($_SESSION["userName"])) {
+                        if( $_SESSION["role"] == "admin"){
+                            echo '<li><a href="adminpage.php">ADMIN PANEL</a></li>';
+                        }
+                        
+                    } 
+                  ?>
+
                </ul>
             </div>
          </nav>

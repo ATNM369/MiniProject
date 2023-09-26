@@ -20,7 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql) === TRUE) {
         echo "<h1>Form Submission Result</h1>";
-        echo "<p>Form data has been successfully added to the database.</p>";
+        echo "<p>Form data has been successfully added to the database.</p><br><br>";
+
+        echo '<a href="index1.php" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Go to Home Page</a>';
+        
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

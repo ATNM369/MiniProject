@@ -9,9 +9,9 @@
         <title>Geo-Tech Hub</title>
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
 <body>
@@ -38,6 +38,7 @@
                     </div>
                 </li>
                     <li><a href="event.php">EVENTS</a></li>
+                    <li><a href="publications.php">PUBLICATIONS</a></li>
                     <li><a href="contact.php">CONTACT US</a></li>
                     <li><a href="logout.php">Log Out</a></li>
                 </ul>
@@ -139,11 +140,11 @@
 </div>
 </section>
 
-<!------------------------------------------------------apply for Project----------------------------------------->
+<!------------------------------------------------------Carrier Oppertunities----------------------------------------->
 
 <section class="pr">
 <div class="row">
-<h1>APPLY FOR A PROJECT</h1>
+<h1>CAREER OPPORTUNITIES</h1>
 </div>
 
 <div class="row">
@@ -256,7 +257,8 @@
 <section class="softwares">
     <h1>Softwares</h1>
     <p>The Geo-Tech HUB of Sabaragamuwa University of Sri Lanka(SUSL) established under the 
-        guidance of the University Grants Co
+        software applications used by employees in this company to perform
+        their duties,including mapping and designing tasks.
     </p>
     
     <div class="row">

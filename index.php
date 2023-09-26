@@ -164,7 +164,9 @@
 
 <section class="pr">
 <div class="row">
-<h1>APPLY FOR A PROJECT</h1>
+
+<!------------------------------------------------------CAREER OPPORTUNITIES------------------------------->
+<h1>CAREER OPPORTUNITIES</h1>
 </div>
 
 <div class="row">

@@ -40,18 +40,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         VALUES ('$fullName', '$affiliation', '$emailAddress', '$phoneNumber', '$titleOfResearch', '$abstract', '$keywords', '$filePath', '$copyrightStatement', '$permissionToPublish', '$coAuthor', '$authorBiography', '$citationFormat', '$attributionPreferences', '$desiredPublicationDate')";
 
                 if ($conn->query($sql) === TRUE) {
-                    echo "Publication added successfully.";
+                    echo "Publication added successfully.<br><br>";
+                    echo '<a href="index1.php" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Go to Home Page</a>';
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
+
+                    echo '<a href="publishes_apply.php" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Go to the form</a>';
                 }
             } else {
-                echo "Error: File upload failed.";
+                echo "Error: File upload failed.<br><br>";
+                echo '<a href="publishes_apply.php" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Go to the form</a>';
             }
         } else {
-            echo "Error: File size exceeds the limit (25MB).";
+            echo "Error: File size exceeds the limit (25MB).<br><br>";
+            echo '<a href="publishes_apply.php" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Back to form</a>';
         }
     } else {
-        echo "Error: Invalid file upload or form submission.";
+        echo "Error: Invalid file upload or form submission.<br><br>";
+        echo '<a href="publishes_apply.php" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Back to form</a>';
     }
 
     // Close the database connection
