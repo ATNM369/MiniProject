@@ -1,4 +1,9 @@
 <?php
+
+if(isset($_GET["projectId"])){
+    $projectId = $_GET["projectId"];
+}
+
 require('fpdf/fpdf.php'); // Make sure to provide the correct path to the fpdf library
 
 class PDF extends FPDF
@@ -31,7 +36,7 @@ try {
         die("Connection failed: " . $connection->connect_error);
     }
     
-    $query = "SELECT * FROM projects ";
+    $query = "SELECT * FROM projects WHERE id = $projectId";
 
     $result_set = $connection->query($query);
 
