@@ -185,8 +185,7 @@
                                             type="button" 
                                             class="btn btn-info" 
                                             style="padding-top: 8px; padding-bottom: 8px;"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal"
+                                            href="?showModal=true&projectId=<?php echo $row["id"]; ?>"
                                             > 
                                             View
                                         </a> 
@@ -233,7 +232,7 @@ catch(mysqli_sql_exception $e)
     </div>
 
     <!--Modal for view details-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -241,92 +240,112 @@ catch(mysqli_sql_exception $e)
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-responsive-sm table-hover">
+            <table class="table table-responsive-sm table-hover">
                 <?php 
-                try
+                    try
                     {
-                        $sql = "SELECT * FROM projects";
+                        $projectIdParam = isset($_GET['projectId']) ? $_GET['projectId'] : null;
+                        if ($projectIdParam !== null) {
+                            $sql = "SELECT * FROM projects WHERE id = $projectIdParam";
 
-                        if (mysqli_query($conn, $sql))
-                        {
-                            $result = mysqli_query($conn, $sql);
-                            $resultRows = mysqli_num_rows($result);
-
-                            if ($resultRows > 0)
+                            if (mysqli_query($conn, $sql))
                             {
-                                while ($row = mysqli_fetch_assoc($result))
-                                { ?>
-                                <tr>
-                                    <td><strong>Full Name</strong></td>
-                                    <td>
-                                        <?php
-                                            echo $row["fullName"];;
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Address</strong></td>
-                                    <td>
-                                        <?php
-                                            echo $row["Address"]; 
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>HEL</strong></td>
-                                    <td>
-                                        <?php
-                                            echo $row["HEL"];
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Academic Background</strong></td>
-                                    <td>
-                                        <?php
-                                            echo $row["AcademicBackground"];
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Previous Work Experience</strong></td>
-                                    <td>
-                                        <?php
-                                            echo $row["PreviousWorkExperience"];
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Job Resposibilities</strong></td>
-                                    <td>
-                                        <?php
-                                            echo $row['JobResponsibilities'];                               
-                                        ?>	
-                                    </td>						
-                                </tr>
-                                <tr>
-                                    <td><strong>Skills And Competencies</strong></td>
-                                    <td>
-                                        <?php
-                                            echo $row['SkillsAndCompetencies'];                                  
-                                        ?>	
-                                    </td>						
-                                </tr>     
+                                $result = mysqli_query($conn, $sql);
+                                $resultRows = mysqli_num_rows($result);
 
+                                if ($resultRows > 0)
+                                {
+                                    while ($row = mysqli_fetch_assoc($result))
+                                    { ?>
+                                        <tr>
+                                            <td><strong>Full Name</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row["fullName"];
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Address</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row["Address"]; 
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                        <tr>
+                                            <td><strong>HEL</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row["HEL"];
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Academic Background</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row["AcademicBackground"];
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Previous Work Experience</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row["PreviousWorkExperience"];
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Job Responsibilities</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row['JobResponsibilities'];                               
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Skills And Competencies</strong></td>
+                                            <td>
+                                                <?php
+                                                echo $row['SkillsAndCompetencies'];                                  
+                                                ?>	
+                                            </td>						
+                                        </tr>
+                                    <?php
+                                    }
+                                }
+                                else
+                                {
+                                    ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <h5><?php echo "Project not found"; ?></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
                                     <?php
                                 }
                             }
                             else
                             {
-                    ?>
-
+                                // Handle the database query error
+                                ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <h5><?php echo "Attendance are not found in this session"; ?></h5>
+                                    <h5><?php echo "Database error"; ?></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-
                                 <?php
                             }
+                        }
+                        else
+                        {
+                            // Handle the case when projectId is not provided in the URL
+                            ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <h5><?php echo "Project ID not provided in the URL"; ?></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <?php
                         }
                     }
                     catch(mysqli_sql_exception $e)
@@ -334,8 +353,10 @@ catch(mysqli_sql_exception $e)
                         // Handle the exception
                         header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Database error");
                         exit();
-                    } ?>
-                </table>
+                    }
+                ?>
+            </table>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -353,6 +374,23 @@ catch(mysqli_sql_exception $e)
     $("#attendance-table").DataTable();
     });
     </script>
+
+    <script>
+            $(document).ready(function(){
+                // check if the "showModal" parameter is present in the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const showModal = urlParams.get('showModal');
+                if (showModal === 'true') {
+                    // show the modal popup
+                    $('#projectModal').modal('show');
+                    // jQuery code to clear URL parameters on modal close with delay
+                    $('#projectModal').on('hidden.bs.modal', function () {
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    });
+                }
+            });
+    </script>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
